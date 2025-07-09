@@ -11,20 +11,22 @@ if (!MONGODB_DB) {
   throw new Error('Please define the MONGODB_DB environment variable inside .env.local');
 }
 
-let cachedClient: MongoClient | null = null;
-let cachedDb: Db | null = null;
+interface CachedConnection {
+    client: MongoClient;
+    db: Db;
+}
 
-export async function connectToDatabase() {
-  if (cachedClient && cachedDb) {
-    return { client: cachedClient, db: cachedDb };
+let cached: CachedConnection | null = null;
+
+export async function connectToDatabase(): Promise<CachedConnection> {
+  if (cached) {
+    return cached;
   }
 
-  const client = await MongoClient.connect(MONGODB_URI);
-
+  const client = new MongoClient(MONGODB_URI);
+  await client.connect();
   const db = client.db(MONGODB_DB);
 
-  cachedClient = client;
-  cachedDb = db;
-
-  return { client, db };
+  cached = { client, db };
+  return cached;
 }
