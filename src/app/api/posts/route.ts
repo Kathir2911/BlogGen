@@ -4,13 +4,17 @@ import type { Post } from '@/types';
 import { connectToDatabase } from '@/lib/mongodb';
 import { ObjectId } from 'mongodb';
 
+export async function getPostsDB() {
+  const { db } = await connectToDatabase();
+  const posts = await db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
+  return posts.map(p => ({...p, id: p._id.toString()}));
+}
+
 // GET all posts
 export async function GET() {
   try {
-    const { db } = await connectToDatabase();
-    const posts = await db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
-
-    return NextResponse.json(posts.map(p => ({...p, id: p._id.toString()})));
+    const posts = await getPostsDB();
+    return NextResponse.json(posts);
   } catch (error) {
     console.error('Failed to fetch posts:', error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
@@ -37,7 +41,7 @@ export async function POST(request: NextRequest) {
       title,
       content,
       userId,
-      createdAt: new Date().toISOString(),
+      createdAt: new date().toISOString(),
     };
 
     const result = await db.collection('posts').insertOne(newPost);

@@ -1,15 +1,17 @@
 import type { Post } from "@/types";
 import { BlogClientPage } from "./client-page";
+import { getPostsDB } from "@/app/api/posts/route";
 
 async function getPosts(): Promise<Post[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts`, {
-    cache: 'no-store'
-  });
-  if (!res.ok) {
-    console.error('Failed to fetch posts:', await res.text());
-    throw new Error('Failed to fetch posts');
+  try {
+    // Fetch data directly from the database function
+    const posts = await getPostsDB();
+    return posts;
+  } catch (error) {
+    console.error('Failed to fetch posts directly:', error);
+    // Return an empty array or handle the error as appropriate
+    return [];
   }
-  return res.json();
 }
 
 export default async function BlogPage() {
