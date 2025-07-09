@@ -108,10 +108,15 @@ export default function LoginPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-            <Button className="w-full" type="submit" disabled={loading}>
-              {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-              Sign in
-            </Button>
+             <div className="flex w-full gap-2">
+                <Button asChild variant="secondary" className="w-full">
+                    <Link href="/">Go to Home</Link>
+                </Button>
+                <Button className="w-full" type="submit" disabled={loading}>
+                    {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                    Sign in
+                </Button>
+            </div>
             <p className="mt-4 text-xs text-center text-muted-foreground">
               Don&apos;t have an account?{' '}
               <Link href="/register" className="underline">
