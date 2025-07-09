@@ -19,8 +19,10 @@ export async function GET(
     if (!post) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
+    
+    const { _id, ...rest } = post;
+    return NextResponse.json({ ...rest, id: _id.toString() });
 
-    return NextResponse.json({...post, id: post._id.toString()});
   } catch (error) {
     console.error(`Failed to fetch post ${params.id}:`, error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
@@ -62,8 +64,9 @@ export async function PUT(
     if (!result) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
-
-    return NextResponse.json({...result, id: result._id.toString()});
+    
+    const { _id, ...rest } = result;
+    return NextResponse.json({...rest, id: _id.toString()});
   } catch (error) {
     console.error(`Failed to update post ${params.id}:`, error);
     if (error instanceof SyntaxError) {

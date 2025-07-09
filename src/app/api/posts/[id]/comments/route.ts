@@ -21,7 +21,10 @@ export async function GET(
     }
 
     const comments = await db.collection('comments').find({ postId: params.id }).sort({ createdAt: -1 }).toArray();
-    return NextResponse.json(comments.map(c => ({...c, id: c._id.toString()})));
+    return NextResponse.json(comments.map(c => {
+        const { _id, ...re } = c;
+        return { ...re, id: _id.toString() };
+    }));
   } catch (error) {
     console.error(`Failed to fetch comments for post ${params.id}:`, error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });

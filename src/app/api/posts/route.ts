@@ -7,7 +7,10 @@ import { ObjectId } from 'mongodb';
 export async function getPostsDB() {
   const { db } = await connectToDatabase();
   const posts = await db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
-  return posts.map(p => ({...p, id: p._id.toString()}));
+  return posts.map(p => {
+    const { _id, ...re } = p;
+    return { ...re, id: _id.toString() };
+  })
 }
 
 // GET all posts
@@ -41,7 +44,7 @@ export async function POST(request: NextRequest) {
       title,
       content,
       userId,
-      createdAt: new date().toISOString(),
+      createdAt: new Date().toISOString(),
     };
 
     const result = await db.collection('posts').insertOne(newPost);
