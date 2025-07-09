@@ -2,7 +2,7 @@ import type { Post } from "@/types";
 import { BlogClientPage } from "./client-page";
 
 async function getPosts(): Promise<Post[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9002'}/api/posts`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts`, {
     cache: 'no-store'
   });
   if (!res.ok) {

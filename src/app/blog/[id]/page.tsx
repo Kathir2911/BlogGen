@@ -3,7 +3,7 @@ import { notFound } from 'next/navigation';
 import { BlogPostClientPage } from './client-page';
 
 async function getPost(id: string): Promise<Post | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9002'}/api/posts/${id}`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts/${id}`, {
     cache: 'no-store'
   });
   if (!res.ok) {
@@ -14,7 +14,7 @@ async function getPost(id: string): Promise<Post | null> {
 }
 
 async function getComments(postId: string): Promise<Comment[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9002'}/api/posts/${postId}/comments`, {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts/${postId}/comments`, {
     cache: 'no-store'
   });
   if (!res.ok) {
