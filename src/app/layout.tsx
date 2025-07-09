@@ -3,8 +3,8 @@ import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 
 export const metadata: Metadata = {
-  title: 'NodeBlog API',
-  description: 'RESTful API for a blog platform',
+  title: 'Nextgen-Blog',
+  description: 'A modern blog platform built with Next.js and MongoDB',
 };
 
 export default function RootLayout({

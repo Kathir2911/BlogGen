@@ -13,10 +13,10 @@ export default function Home() {
             <Terminal className="h-8 w-8" />
           </div>
           <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
-            <span className="text-primary">NodeBlog</span> API Explorer
+            <span className="text-primary">Nextgen-Blog</span> API Explorer
           </h1>
           <p className="text-muted-foreground mt-3 text-lg max-w-2xl mx-auto">
-            An interactive interface for creating, editing, and retrieving blog posts and comments on the NodeBlog platform.
+            An interactive interface for creating, editing, and retrieving blog posts and comments on the Nextgen-Blog platform.
           </p>
         </header>
 

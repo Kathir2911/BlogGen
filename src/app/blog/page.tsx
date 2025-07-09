@@ -14,7 +14,6 @@ import { format } from "date-fns";
 
 async function getPosts() {
   // This fetch call is server-side and will not expose the direct API URL to the client.
-  // In a real-world app, you'd have this base URL in an environment variable.
   const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:9002'}/api/posts`, {
     cache: 'no-store' // Fetch fresh data on each request
   });
@@ -36,7 +35,7 @@ export default async function BlogPage() {
             <Newspaper className="h-8 w-8" />
           </div>
           <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
-            The NodeBlog
+            The Nextgen-Blog
           </h1>
           <p className="text-muted-foreground mt-3 text-lg max-w-2xl mx-auto">
             Welcome to our corner of the internet. Here are our latest thoughts and articles.

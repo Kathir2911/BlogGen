@@ -30,7 +30,7 @@ export function Documentation() {
     <div className="prose prose-lg dark:prose-invert max-w-none">
       <h2 className="text-3xl font-headline font-bold mb-4">API Documentation</h2>
       <p className="text-muted-foreground">
-        This documentation provides all the information you need to interact with the NodeBlog API. The descriptions are powered by an LLM to be clear and concise.
+        This documentation provides all the information you need to interact with the Nextgen-Blog API. The descriptions are powered by an LLM to be clear and concise.
       </p>
 
       <Accordion type="single" collapsible className="w-full mt-8" defaultValue="item-1">
