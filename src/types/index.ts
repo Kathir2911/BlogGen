@@ -1,4 +1,7 @@
+import type { ObjectId } from 'mongodb';
+
 export interface Post {
+  _id?: ObjectId;
   id: string;
   userId: string;
   title: string;
@@ -7,6 +10,7 @@ export interface Post {
 }
 
 export interface Comment {
+  _id?: ObjectId;
   id: string;
   postId: string;
   userId: string;

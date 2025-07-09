@@ -1,3 +1,5 @@
+// This file is no longer used for data storage as we have migrated to MongoDB.
+// It is kept for reference or future use if needed.
 import type { Post, Comment } from '@/types';
 
 // In-memory store
