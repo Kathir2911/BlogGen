@@ -29,7 +29,7 @@ export const backgrounds = [
     name: "Lake Wanaka",
     slug: "lake-wanaka",
     url: 'https://placehold.co/1920x1080.png',
-    hint: 'lake reflection'
+    hint: 'wanaka tree'
   },
   {
     name: "Aurora Borealis",
