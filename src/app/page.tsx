@@ -1,16 +1,18 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
+import { BackgroundSwitcher } from "@/components/background-switcher";
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen bg-background text-foreground">
-      <header className="absolute top-0 right-0 p-4">
+    <div className="flex flex-col min-h-screen">
+      <header className="absolute top-0 right-0 p-4 flex gap-2">
+        <BackgroundSwitcher />
         <ThemeSwitcher />
       </header>
       <main className="flex-grow container mx-auto px-4 py-8 md:px-6 md:py-12 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold tracking-tight mb-4 font-headline">
+          <h1 className="text-5xl font-bold tracking-tight mb-4 font-headline text-foreground">
             Welcome to <span className="text-primary">Nextgen-Blog</span>
           </h1>
           <p className="text-muted-foreground text-xl mb-8 max-w-3xl mx-auto font-body">

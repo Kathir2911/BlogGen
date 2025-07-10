@@ -2,6 +2,8 @@ import type {Metadata} from 'next';
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider";
+import { BackgroundProvider } from '@/hooks/use-background.tsx';
+import { Background } from '@/components/background';
 
 export const metadata: Metadata = {
   title: 'Nextgen-Blog',
@@ -21,14 +23,17 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Source+Code+Pro:wght@400;500&display=swap" rel="stylesheet" />
       </head>
       <body className="font-body bg-background antialiased">
-        <ThemeProvider
-          attribute="class"
-          defaultTheme="chronicle"
-          enableSystem={false}
-        >
-          {children}
-          <Toaster />
-        </ThemeProvider>
+        <BackgroundProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="chronicle"
+            enableSystem={false}
+          >
+            <Background />
+            {children}
+            <Toaster />
+          </ThemeProvider>
+        </BackgroundProvider>
       </body>
     </html>
   );

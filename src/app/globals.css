@@ -170,4 +170,9 @@ body {
   body {
     @apply bg-background text-foreground;
   }
+
+  .bg-background {
+    background-color: hsl(var(--background));
+    transition: background-color 0.5s ease;
+  }
 }
