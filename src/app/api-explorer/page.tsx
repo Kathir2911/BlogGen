@@ -16,7 +16,7 @@ export default function ApiExplorerPage() {
             API Explorer
           </h1>
           <p className="text-muted-foreground text-lg max-w-3xl mx-auto">
-            Interact with the NodeBlogAPI endpoints directly from your browser. Test out creating, reading, updating, and deleting posts and comments.
+            Interact with the BlogGen API endpoints directly from your browser. Test out creating, reading, updating, and deleting posts and comments.
           </p>
         </header>
         <ApiEndpoints />

@@ -11,7 +11,7 @@ const spaceGrotesk = Space_Grotesk({ subsets: ['latin'], variable: '--font-space
 const sourceCodePro = Source_Code_Pro({ subsets: ['latin'], variable: '--font-source-code-pro' })
 
 export const metadata: Metadata = {
-  title: 'NodeBlogAPI',
+  title: 'BlogGen',
   description: 'A modern blog platform built with Next.js and MongoDB',
 };
 

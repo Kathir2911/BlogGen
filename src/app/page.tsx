@@ -8,7 +8,7 @@ export default function Home() {
     <div className="flex flex-col min-h-screen">
       <header className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
         <Link href="/" className="font-headline text-2xl font-bold text-foreground">
-          NodeBlogAPI
+          BlogGen
         </Link>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost">

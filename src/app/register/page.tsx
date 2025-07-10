@@ -91,7 +91,7 @@ export default function RegisterPage() {
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-2 text-foreground">
             <Newspaper className="h-7 w-7" />
-            <span className="text-2xl font-bold font-headline">NodeBlogAPI</span>
+            <span className="text-2xl font-bold font-headline">BlogGen</span>
         </Link>
       </div>
       <Card className="w-full max-w-sm">
