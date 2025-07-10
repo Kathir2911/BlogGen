@@ -87,8 +87,8 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="relative flex flex-col items-center justify-center min-h-screen bg-background p-4">
-      <div className="absolute top-4 left-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+      <div className="mb-6">
         <Link href="/" className="flex items-center gap-2 text-foreground">
             <Newspaper className="h-7 w-7" />
             <span className="text-2xl font-bold font-headline">NodeBlogAPI</span>
