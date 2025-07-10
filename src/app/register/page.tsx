@@ -66,8 +66,8 @@ export default function RegisterPage() {
 
       if (res.ok) {
         toast({
-          title: "OTP Sent (Simulation)",
-          description: `For testing, your OTP is: ${data.otp}. Please enter it to complete registration.`,
+          title: "OTP Sent",
+          description: `An OTP has been sent to your mobile number. Please enter it to complete registration.`,
         });
         setStep('otp');
       } else {

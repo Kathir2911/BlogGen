@@ -3,9 +3,15 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { setMockOtp } from '../register/route';
 
+require('dotenv').config()
+
 // In a real app, you would use a library like Twilio to send SMS.
-// const twilio = require('twilio');
-// const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const twilio = require('twilio');
+const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+
+function generateOtp() {
+    return Math.floor(100000 + Math.random() * 900000).toString();
+}
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,30 +42,29 @@ export async function POST(request: NextRequest) {
         }
     }
 
-    // --- OTP Generation (Simulation) ---
-    // In a real app, you'd generate a random OTP.
-    const otp = "123456"; // For testing purposes
+    // --- OTP Generation ---
+    const otp = generateOtp();
     setMockOtp(mobile, otp);
     // --- End OTP Generation ---
 
-    // --- Real SMS Sending Logic (Example - commented out) ---
-    /*
+    // --- Real SMS Sending Logic ---
     try {
+        if (!process.env.TWILIO_PHONE_NUMBER) {
+            throw new Error("Twilio phone number is not configured in environment variables.");
+        }
         await client.messages.create({
             body: `Your BlogGen verification code is: ${otp}`,
             from: process.env.TWILIO_PHONE_NUMBER,
             to: mobile
         });
-    } catch (smsError) {
+    } catch (smsError: any) {
         console.error('Twilio SMS error:', smsError);
-        return NextResponse.json({ message: 'Failed to send OTP SMS' }, { status: 500 });
+        // Don't expose detailed Twilio errors to the client
+        return NextResponse.json({ message: `Failed to send OTP SMS. Please check server configuration. ${smsError.message}` }, { status: 500 });
     }
-    */
     // --- End Real SMS Sending ---
 
-    // Return the mock OTP for frontend testing. 
-    // In a real app, you would NOT return the OTP in the response.
-    return NextResponse.json({ message: 'OTP sent successfully (simulation)', otp }, { status: 200 });
+    return NextResponse.json({ message: 'OTP sent successfully' }, { status: 200 });
 
   } catch (error) {
     if (error instanceof SyntaxError) {
