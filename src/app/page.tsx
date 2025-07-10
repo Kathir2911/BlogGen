@@ -14,9 +14,6 @@ export default function Home() {
           <Button asChild variant="ghost">
             <Link href="/blog">Blog UI</Link>
           </Button>
-          <Button asChild variant="ghost">
-             <Link href="/api-explorer">API Explorer</Link>
-          </Button>
           <BackgroundSwitcher />
           <ThemeSwitcher />
         </div>
