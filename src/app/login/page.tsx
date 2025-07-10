@@ -87,7 +87,7 @@ export default function LoginPage() {
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
           <CardDescription>
-            Enter your username below to login to your account.
+            Enter your username and password to login.
           </CardDescription>
         </CardHeader>
         <form onSubmit={handleLogin}>
@@ -102,17 +102,17 @@ export default function LoginPage() {
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
               />
-            </div>
-            <div className="grid gap-2">
-              <div className="flex items-center">
-                <Label htmlFor="password">Password</Label>
-                 <Link
-                  href="/forgot-password"
-                  className="ml-auto inline-block text-xs underline"
+              <div className="text-right">
+                <Link
+                  href="/forgot-username"
+                  className="inline-block text-xs underline"
                 >
-                  Forgot your password?
+                  Forgot your username?
                 </Link>
               </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="password">Password</Label>
               <Input
                 id="password"
                 type="password"
@@ -120,6 +120,14 @@ export default function LoginPage() {
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
               />
+               <div className="text-right">
+                 <Link
+                  href="/forgot-password"
+                  className="inline-block text-xs underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
@@ -131,10 +139,6 @@ export default function LoginPage() {
               Don&apos;t have an account?{' '}
               <Link href="/register" className="underline">
                 Sign up
-              </Link>
-              {' | '}
-              <Link href="/forgot-username" className="underline">
-                Forgot username?
               </Link>
             </p>
           </CardFooter>
