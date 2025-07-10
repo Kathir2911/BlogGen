@@ -59,7 +59,7 @@ export default function Home() {
           </form>
           <div className="space-x-4 mt-8">
             <Button asChild size="lg">
-              <Link href="/blog">Login</Link>
+              <Link href="/blog">Get Started</Link>
             </Button>
           </div>
         </div>
