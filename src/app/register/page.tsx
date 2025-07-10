@@ -74,11 +74,13 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
-        <Link href="/" className="flex items-center gap-2 mb-6 text-foreground">
+    <div className="relative flex flex-col items-center justify-center min-h-screen bg-background p-4">
+      <div className="absolute top-4 left-4">
+        <Link href="/" className="flex items-center gap-2 text-foreground">
             <Newspaper className="h-7 w-7" />
             <span className="text-2xl font-bold font-headline">NodeBlogAPI</span>
         </Link>
+      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Register</CardTitle>
