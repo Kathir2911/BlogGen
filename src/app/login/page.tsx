@@ -1,3 +1,4 @@
+
 // src/app/login/page.tsx
 "use client";
 
@@ -78,8 +79,8 @@ export default function LoginPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-2 text-foreground">
-            <Newspaper className="h-7 w-7" />
-            <span className="text-2xl font-bold font-headline">BlogGen</span>
+            <Newspaper className="h-7 w-7 text-primary" />
+            <span className="text-2xl font-bold font-headline text-primary">BlogGen</span>
         </Link>
       </div>
       <Card className="w-full max-w-sm">
@@ -103,7 +104,15 @@ export default function LoginPage() {
               />
             </div>
             <div className="grid gap-2">
-              <Label htmlFor="password">Password</Label>
+              <div className="flex items-center">
+                <Label htmlFor="password">Password</Label>
+                 <Link
+                  href="/forgot-password"
+                  className="ml-auto inline-block text-xs underline"
+                >
+                  Forgot your password?
+                </Link>
+              </div>
               <Input
                 id="password"
                 type="password"
@@ -122,6 +131,10 @@ export default function LoginPage() {
               Don&apos;t have an account?{' '}
               <Link href="/register" className="underline">
                 Sign up
+              </Link>
+              {' | '}
+              <Link href="/forgot-username" className="underline">
+                Forgot username?
               </Link>
             </p>
           </CardFooter>
