@@ -31,7 +31,7 @@ export default function Home() {
         </Link>
         <div className="flex items-center gap-2">
           <Button asChild variant="ghost">
-            <Link href="/blog">Blog UI</Link>
+            <Link href="/blog">Get Started</Link>
           </Button>
           <BackgroundSwitcher />
           <ThemeSwitcher />
@@ -59,7 +59,7 @@ export default function Home() {
           </form>
           <div className="space-x-4 mt-8">
             <Button asChild size="lg">
-              <Link href="/login">Get Started</Link>
+              <Link href="/login">Login</Link>
             </Button>
           </div>
         </div>
