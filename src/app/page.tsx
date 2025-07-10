@@ -30,15 +30,11 @@ export default function Home() {
             <Button asChild size="lg">
               <Link href="/login">Get Started</Link>
             </Button>
-             <Button asChild size="lg" variant="secondary">
-              <Link href="/api-explorer">Explore the API</Link>
-            </Button>
           </div>
         </div>
       </main>
       <footer className="w-full py-6">
         <div className="container mx-auto text-center text-muted-foreground text-sm">
-          Built with Node.js, Next.js, and MongoDB.
         </div>
       </footer>
     </div>
