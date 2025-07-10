@@ -28,7 +28,7 @@ export default function Home() {
       </main>
       <footer className="w-full py-6">
         <div className="container mx-auto text-center text-muted-foreground text-sm">
-          <p>Built with Node.js, Next.js, and MongoDB.</p>
+          
         </div>
       </footer>
     </div>
