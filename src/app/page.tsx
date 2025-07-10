@@ -10,11 +10,11 @@ export default function Home() {
       </header>
       <main className="flex-grow container mx-auto px-4 py-8 md:px-6 md:py-12 flex items-center justify-center">
         <div className="text-center">
-          <h1 className="text-5xl font-bold tracking-tighter mb-4 font-headline">
+          <h1 className="text-5xl font-bold tracking-tight mb-4 font-headline">
             Welcome to <span className="text-primary">Nextgen-Blog</span>
           </h1>
-          <p className="text-muted-foreground text-xl mb-8 max-w-3xl mx-auto">
-            A powerful, modern, and easy-to-use RESTful API for your blog.
+          <p className="text-muted-foreground text-xl mb-8 max-w-3xl mx-auto font-body">
+            Stories, thoughts, and ideas from the curious minds.
           </p>
           <div className="space-x-4">
             <Button asChild size="lg">
