@@ -1,3 +1,4 @@
+
 // src/app/register/page.tsx
 "use client";
 
@@ -16,7 +17,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Newspaper } from "lucide-react";
 
 export default function RegisterPage() {
   const [username, setUsername] = useState("");
@@ -73,7 +74,11 @@ export default function RegisterPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+        <Link href="/" className="flex items-center gap-2 mb-6 text-foreground">
+            <Newspaper className="h-7 w-7" />
+            <span className="text-2xl font-bold font-headline">NodeBlogAPI</span>
+        </Link>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Register</CardTitle>
