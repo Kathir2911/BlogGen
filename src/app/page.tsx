@@ -1,9 +1,13 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { ThemeSwitcher } from "@/components/theme-switcher";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen bg-background text-foreground">
+      <header className="absolute top-0 right-0 p-4">
+        <ThemeSwitcher />
+      </header>
       <main className="flex-grow container mx-auto px-4 py-8 md:px-6 md:py-12 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-5xl font-bold tracking-tighter mb-4 font-headline">
