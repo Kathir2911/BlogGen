@@ -26,11 +26,13 @@ export default function RootLayout({
         <BackgroundProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="chronicle"
+            defaultTheme="theme-chronicle"
             enableSystem={false}
           >
+            <div className="relative z-10">
+              {children}
+            </div>
             <Background />
-            {children}
             <Toaster />
           </ThemeProvider>
         </BackgroundProvider>
