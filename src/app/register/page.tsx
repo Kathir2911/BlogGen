@@ -20,6 +20,11 @@ import Link from "next/link";
 import { Loader2, Newspaper } from "lucide-react";
 
 export default function RegisterPage() {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [email, setEmail] = useState("");
+  const [mobile, setMobile] = useState("");
+  const [dob, setDob] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
   const [loading, setLoading] = useState(false);
@@ -30,11 +35,11 @@ export default function RegisterPage() {
     e.preventDefault();
     setLoading(true);
 
-    if (!username || !password) {
+    if (!firstName || !email || !mobile || !dob || !username || !password) {
       toast({
         variant: "destructive",
         title: "Missing Fields",
-        description: "Please enter both username and password.",
+        description: "Please fill out all required fields.",
       });
       setLoading(false);
       return;
@@ -44,7 +49,15 @@ export default function RegisterPage() {
       const res = await fetch("/api/auth/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          mobile,
+          dob,
+          username,
+          password,
+        }),
       });
 
       const data = await res.json();
@@ -90,6 +103,28 @@ export default function RegisterPage() {
         </CardHeader>
         <form onSubmit={handleRegister}>
           <CardContent className="grid gap-4">
+            <div className="grid grid-cols-2 gap-4">
+                <div className="grid gap-2">
+                    <Label htmlFor="firstName">First Name</Label>
+                    <Input id="firstName" placeholder="John" required value={firstName} onChange={(e) => setFirstName(e.target.value)} />
+                </div>
+                <div className="grid gap-2">
+                    <Label htmlFor="lastName">Last Name (Optional)</Label>
+                    <Input id="lastName" placeholder="Doe" value={lastName} onChange={(e) => setLastName(e.target.value)} />
+                </div>
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="email">Email</Label>
+              <Input id="email" type="email" placeholder="m@example.com" required value={email} onChange={(e) => setEmail(e.target.value)} />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="mobile">Mobile Number</Label>
+              <Input id="mobile" type="tel" placeholder="123-456-7890" required value={mobile} onChange={(e) => setMobile(e.target.value)} />
+            </div>
+            <div className="grid gap-2">
+              <Label htmlFor="dob">Date of Birth</Label>
+              <Input id="dob" type="date" required value={dob} onChange={(e) => setDob(e.target.value)} />
+            </div>
             <div className="grid gap-2">
               <Label htmlFor="username">Username</Label>
               <Input

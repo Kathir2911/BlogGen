@@ -1,3 +1,4 @@
+
 // src/app/api/auth/register/route.ts
 import { NextResponse, type NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
@@ -5,10 +6,18 @@ import { hash } from 'bcryptjs';
 
 export async function POST(request: NextRequest) {
   try {
-    const { username, password } = await request.json();
+    const { 
+        firstName, 
+        lastName, 
+        email, 
+        mobile, 
+        dob, 
+        username, 
+        password 
+    } = await request.json();
 
-    if (!username || !password) {
-      return NextResponse.json({ message: 'Username and password are required' }, { status: 400 });
+    if (!firstName || !email || !mobile || !dob || !username || !password) {
+      return NextResponse.json({ message: 'All required fields must be filled' }, { status: 400 });
     }
     
     if (password.length < 6) {
@@ -17,14 +26,24 @@ export async function POST(request: NextRequest) {
 
     const { db } = await connectToDatabase();
     
-    const existingUser = await db.collection('users').findOne({ username });
+    const existingUser = await db.collection('users').findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
-      return NextResponse.json({ message: 'Username already exists' }, { status: 409 });
+        if (existingUser.username === username) {
+            return NextResponse.json({ message: 'Username already exists' }, { status: 409 });
+        }
+        if (existingUser.email === email) {
+            return NextResponse.json({ message: 'Email already exists' }, { status: 409 });
+        }
     }
 
     const hashedPassword = await hash(password, 12);
 
     const result = await db.collection('users').insertOne({
+      firstName,
+      lastName,
+      email,
+      mobile,
+      dob,
       username,
       password: hashedPassword,
       createdAt: new Date(),
