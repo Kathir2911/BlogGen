@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { Loader2 } from "lucide-react";
+import { Loader2, Newspaper } from "lucide-react";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -75,7 +75,13 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-background">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+      <div className="mb-6">
+        <Link href="/" className="flex items-center gap-2 text-foreground">
+            <Newspaper className="h-7 w-7" />
+            <span className="text-2xl font-bold font-headline">BlogGen</span>
+        </Link>
+      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
@@ -108,15 +114,10 @@ export default function LoginPage() {
             </div>
           </CardContent>
           <CardFooter className="flex flex-col">
-             <div className="flex w-full gap-2">
-                <Button asChild variant="secondary" className="w-full">
-                    <Link href="/">Go to Home</Link>
-                </Button>
-                <Button className="w-full" type="submit" disabled={loading}>
-                    {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
-                    Sign in
-                </Button>
-            </div>
+            <Button className="w-full" type="submit" disabled={loading}>
+                {loading && <Loader2 className="mr-2 h-4 w-4 animate-spin" />}
+                Sign in
+            </Button>
             <p className="mt-4 text-xs text-center text-muted-foreground">
               Don&apos;t have an account?{' '}
               <Link href="/register" className="underline">
