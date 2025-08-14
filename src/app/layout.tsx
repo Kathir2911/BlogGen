@@ -37,7 +37,6 @@ export default function RootLayout({
               </main>
                <footer className="w-full py-6">
                 <div className="container mx-auto text-center text-muted-foreground text-sm">
-                  Powered by Next.js, Genkit, and MongoDB.
                 </div>
               </footer>
             </div>
