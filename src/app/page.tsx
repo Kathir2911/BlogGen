@@ -3,12 +3,9 @@
 
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
-import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
-import { BackgroundSwitcher } from '@/components/background-switcher';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -24,23 +21,8 @@ export default function Home() {
   };
 
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="container mx-auto px-4 md:px-6 h-20 flex items-center justify-between">
-        <Link href="/" className="font-headline text-2xl font-bold text-foreground">
-          BlogGen
-        </Link>
-        <div className="flex items-center gap-2">
-          <Button asChild variant="ghost">
-            <Link href="/login">Login</Link>
-          </Button>
-           <Button asChild variant="ghost">
-            <Link href="/blog">Get Started</Link>
-          </Button>
-          <BackgroundSwitcher />
-          <ThemeSwitcher />
-        </div>
-      </header>
-      <main className="flex-grow container mx-auto px-4 py-8 md:px-6 md:py-12 flex items-center justify-center">
+    <div className="flex flex-col min-h-full flex-grow">
+      <div className="flex-grow container mx-auto px-4 py-8 md:px-6 md:py-12 flex items-center justify-center">
         <div className="text-center max-w-3xl">
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 font-headline text-foreground">
             Your Voice. Your Platform.
@@ -64,12 +46,7 @@ export default function Home() {
             </div>
           </form>
         </div>
-      </main>
-      <footer className="w-full py-6">
-        <div className="container mx-auto text-center text-muted-foreground text-sm">
-           Powered by Next.js, Genkit, and MongoDB.
-        </div>
-      </footer>
+      </div>
     </div>
   );
 }

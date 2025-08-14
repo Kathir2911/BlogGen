@@ -29,7 +29,7 @@ export const backgrounds = [
   {
     name: "Lake Wanaka",
     slug: "lake-wanaka",
-    url: 'https://images.unsplash.com/photo-1516938747262-9e336203a3fa?q=80&w=1920&auto=format&fit=crop',
+    url: 'https://plus.unsplash.com/premium_photo-1696531220266-362a418da9b4?q=80&w=1331?q=80&w=1920&auto=format&fit=crop',
     hint: 'wanaka tree'
   },
   {
@@ -41,13 +41,13 @@ export const backgrounds = [
   {
     name: "Misty Lake",
     slug: "misty-lake",
-    url: 'https://plus.unsplash.com/premium_photo-1673603719788-5142a261a148?q=80&w=1920&auto=format&fit=crop',
+    url: 'https://images.unsplash.com/photo-1511300636408-a63a89df3482?q=80&w=2070?q=80&w=1920&auto=format&fit=crop',
     hint: 'misty lake'
   },
   {
     name: "Pastel Sky",
     slug: "pastel-sky",
-    url: 'https://images.unsplash.com/photo-1518066000714-58c45f7e8c4b?q=80&w=1920&auto=format&fit=crop',
+    url: 'https://images.unsplash.com/photo-1624087180397-67cf99a7acba?q=80&w=1170?q=80&w=1920&auto=format&fit=crop',
     hint: 'pastel sky'
   },
   {
@@ -71,7 +71,7 @@ export const backgrounds = [
   {
     name: "Mountain Lake",
     slug: "mountain-lake",
-    url: 'https://images.unsplash.com/photo-1476610182240-c089bb3ac245?q=80&w=1920&auto=format&fit=crop',
+    url: 'https://images.unsplash.com/photo-1603979649806-5299879db16b?q=80&w=1171?q=80&w=1920&auto=format&fit=crop',
     hint: 'mountain lake'
   },
 ]

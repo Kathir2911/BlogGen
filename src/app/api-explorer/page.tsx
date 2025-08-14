@@ -9,7 +9,7 @@ import { ApiEndpoints } from "@/components/api-endpoints";
 
 export default function ApiExplorerPage() {
   return (
-    <div className="min-h-screen bg-background text-foreground">
+    <div className="bg-background/80 text-foreground rounded-lg border shadow-lg">
       <main className="container mx-auto p-4 md:p-8">
         <header className="text-center mb-12">
           <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter mb-2">

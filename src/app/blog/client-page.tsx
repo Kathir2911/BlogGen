@@ -119,8 +119,8 @@ export function BlogClientPage({ initialPosts }: BlogClientPageProps) {
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto p-4 md:p-8">
+    <div className="bg-background/80 text-foreground rounded-lg border shadow-lg">
+      <div className="container mx-auto p-4 md:p-8">
         <header className="flex justify-between items-start mb-10 gap-4">
           <div className="text-left">
               <Link href="/" aria-label="Back to Homepage">
@@ -233,10 +233,7 @@ export function BlogClientPage({ initialPosts }: BlogClientPageProps) {
             )}
           </div>
         )}
-      </main>
-      <footer className="text-center p-6 text-muted-foreground text-sm">
-        <p>A modern blog built with Next.js and MongoDB.</p>
-      </footer>
+      </div>
     </div>
   );
 }

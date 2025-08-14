@@ -75,8 +75,8 @@ export function BlogPostClientPage({ initialPost, initialComments }: BlogPostCli
   }
 
   return (
-    <div className="min-h-screen bg-background text-foreground">
-      <main className="container mx-auto p-4 md:p-8 max-w-4xl">
+    <div className="bg-background/80 text-foreground rounded-lg border shadow-lg">
+      <div className="container mx-auto p-4 md:p-8 max-w-4xl">
         <div className="mb-8">
           <Link href="/blog" className="flex items-center text-sm text-muted-foreground hover:text-primary transition-colors">
             <ArrowLeft className="mr-2 h-4 w-4" />
@@ -152,10 +152,7 @@ export function BlogPostClientPage({ initialPost, initialComments }: BlogPostCli
             )}
           </div>
         </section>
-      </main>
-      <footer className="text-center p-6 text-muted-foreground text-sm">
-        <p>A modern blog built with Next.js and MongoDB.</p>
-      </footer>
+      </div>
     </div>
   );
 }
