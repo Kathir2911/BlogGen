@@ -28,13 +28,13 @@ export const backgrounds = [
   {
     name: "Lake Wanaka",
     slug: "lake-wanaka",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1516938747262-9e336203a3fa?q=80&w=1920&auto=format&fit=crop',
     hint: 'wanaka tree'
   },
   {
     name: "Aurora Borealis",
     slug: "aurora",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1531366936337-7c912a4589a7?q=80&w=1920&auto=format&fit=crop',
     hint: 'aurora borealis'
   },
   {
@@ -46,31 +46,31 @@ export const backgrounds = [
   {
     name: "Pastel Sky",
     slug: "pastel-sky",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1518066000714-58c45f7e8c4b?q=80&w=1920&auto=format&fit=crop',
     hint: 'pastel sky'
   },
   {
     name: "Abstract Blue",
     slug: "abstract-blue",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1557682250-33bd709cbe85?q=80&w=1920&auto=format&fit=crop',
     hint: 'abstract blue'
   },
   {
     name: "City Harbor",
     slug: "city-harbor",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1449824913935-59a10b8d2000?q=80&w=1920&auto=format&fit=crop',
     hint: 'city harbor'
   },
   {
     name: "Desert Galaxy",
     slug: "desert-galaxy",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1464802686167-b939a6910659?q=80&w=1920&auto=format&fit=crop',
     hint: 'desert galaxy'
   },
   {
     name: "Mountain Lake",
     slug: "mountain-lake",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1476610182240-c089bb3ac245?q=80&w=1920&auto=format&fit=crop',
     hint: 'mountain lake'
   },
 ]
@@ -101,7 +101,7 @@ export function BackgroundSwitcher() {
                 <div className="flex-shrink-0">
                     <Image 
                         data-ai-hint={currentBg.hint}
-                        src={currentBg.url.replace('1920x1080', '150x100')}
+                        src={currentBg.url.replace('w=1920', 'w=150')}
                         alt={currentBg.name}
                         width={150}
                         height={100}
@@ -110,7 +110,7 @@ export function BackgroundSwitcher() {
                 </div>
                 <div className="flex-1 space-y-1">
                     <p className="text-sm font-medium leading-none">{currentBg.name}</p>
-                    <p className="text-sm text-muted-foreground">Image by AI</p>
+                    <p className="text-sm text-muted-foreground">Image by Unsplash</p>
                 </div>
              </div>
           )}
