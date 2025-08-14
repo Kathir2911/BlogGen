@@ -2,26 +2,44 @@
 import type { Post, Comment } from "@/types";
 import { notFound } from 'next/navigation';
 import { BlogPostClientPage } from './client-page';
+import { connectToDatabase } from "@/lib/mongodb";
+import { ObjectId } from "mongodb";
 
 async function getPost(id: string): Promise<Post | null> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts/${id}`, {
-    cache: 'no-store'
-  });
-  if (!res.ok) {
-    if (res.status === 404) return null;
-    throw new Error('Failed to fetch post');
+  if (!ObjectId.isValid(id)) {
+    return null;
   }
-  return res.json();
+  try {
+    const { db } = await connectToDatabase();
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(id) });
+
+    if (!post) {
+      return null;
+    }
+    
+    const { _id, ...rest } = post;
+    return { ...rest, id: _id.toString() } as Post;
+  } catch (error) {
+    console.error('Failed to fetch post directly:', error);
+    return null;
+  }
 }
 
 async function getComments(postId: string): Promise<Comment[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || 'http://localhost:5000'}/api/posts/${postId}/comments`, {
-    cache: 'no-store'
-  });
-  if (!res.ok) {
-    throw new Error('Failed to fetch comments');
+  if (!ObjectId.isValid(postId)) {
+    return [];
   }
-  return res.json();
+  try {
+    const { db } = await connectToDatabase();
+    const comments = await db.collection('comments').find({ postId: postId }).sort({ createdAt: -1 }).toArray();
+    return comments.map(c => {
+        const { _id, ...re } = c;
+        return { ...re, id: _id.toString() } as Comment;
+    });
+  } catch (error) {
+    console.error('Failed to fetch comments directly:', error);
+    return [];
+  }
 }
 
 interface BlogPostPageProps {
