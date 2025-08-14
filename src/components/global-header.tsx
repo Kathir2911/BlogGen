@@ -6,7 +6,6 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { BackgroundSwitcher } from '@/components/background-switcher';
-import { ThemeSwitcher } from '@/components/theme-switcher';
 import type { User } from '@/types';
 import { useToast } from '@/hooks/use-toast';
 import { LogOut, User as UserIcon } from 'lucide-react';
@@ -65,7 +64,6 @@ export function GlobalHeader() {
           </Button>
         )}
         <BackgroundSwitcher />
-        <ThemeSwitcher />
       </div>
     </header>
   );
