@@ -52,9 +52,6 @@ export function GlobalHeader() {
         <Button asChild variant="ghost">
           <Link href="/blog">Blog</Link>
         </Button>
-        <Button asChild variant="ghost">
-          <Link href="/api-explorer">API</Link>
-        </Button>
         {user ? (
           <>
             <span className="text-sm font-medium flex items-center gap-2"><UserIcon className="h-4 w-4" /> {user.username}</span>
