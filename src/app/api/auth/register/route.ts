@@ -52,9 +52,11 @@ export async function POST(request: NextRequest) {
         if (existingUser.email === email) {
             return NextResponse.json({ message: 'Email already exists' }, { status: 409 });
         }
-        if (existingUser.mobile === mobile) {
-            return NextResponse.json({ message: 'Mobile number already exists' }, { status: 409 });
-        }
+    }
+    
+    const mobileCount = await db.collection('users').countDocuments({ mobile });
+    if (mobileCount >= 3) {
+      return NextResponse.json({ message: 'This mobile number has reached the maximum number of registrations.' }, { status: 409 });
     }
 
     const hashedPassword = await hash(password, 12);

@@ -28,17 +28,20 @@ export async function POST(request: NextRequest) {
 
     const { db } = await connectToDatabase();
     
+    // Check registration limit for the mobile number
+    const mobileCount = await db.collection('users').countDocuments({ mobile });
+    if (mobileCount >= 3) {
+      return NextResponse.json({ message: 'This mobile number has reached the maximum number of registrations.' }, { status: 409 });
+    }
+
     // Check if user already exists
-    const existingUser = await db.collection('users').findOne({ $or: [{ username }, { email }, { mobile }] });
+    const existingUser = await db.collection('users').findOne({ $or: [{ username }, { email }] });
     if (existingUser) {
         if (existingUser.username === username) {
             return NextResponse.json({ message: 'Username already exists' }, { status: 409 });
         }
         if (existingUser.email === email) {
             return NextResponse.json({ message: 'Email already exists' }, { status: 409 });
-        }
-        if (existingUser.mobile === mobile) {
-            return NextResponse.json({ message: 'Mobile number already registered' }, { status: 409 });
         }
     }
 
