@@ -16,7 +16,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 import Link from "next/link";
-import { Loader2, Newspaper } from "lucide-react";
+import { Loader2 } from "lucide-react";
 
 export default function LoginPage() {
   const [username, setUsername] = useState("");
@@ -76,12 +76,6 @@ export default function LoginPage() {
 
   return (
     <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-4">
-      <div className="mb-6">
-        <Link href="/" className="flex items-center gap-2 text-foreground">
-            <Newspaper className="h-7 w-7 text-primary" />
-            <span className="text-2xl font-bold font-headline text-primary">BlogGen</span>
-        </Link>
-      </div>
       <Card className="w-full max-w-sm">
         <CardHeader>
           <CardTitle className="text-2xl">Login</CardTitle>
