@@ -28,8 +28,8 @@ export default function RootLayout({
         <BackgroundProvider>
           <ThemeProvider
             attribute="class"
-            defaultTheme="light"
-            forcedTheme="light"
+            defaultTheme="dark"
+            forcedTheme="dark"
           >
             <div className="relative z-10 flex flex-col min-h-screen">
                <GlobalHeader />
