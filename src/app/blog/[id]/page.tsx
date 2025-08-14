@@ -1,3 +1,4 @@
+
 import type { Post, Comment } from "@/types";
 import { notFound } from 'next/navigation';
 import { BlogPostClientPage } from './client-page';
@@ -23,14 +24,19 @@ async function getComments(postId: string): Promise<Comment[]> {
   return res.json();
 }
 
-export default async function BlogPostPage({ params }: { params: { id: string } }) {
-  const post = await getPost(params.id);
+interface BlogPostPageProps {
+  params: { id: string };
+}
+
+export default async function BlogPostPage({ params }: BlogPostPageProps) {
+  const { id } = params;
+  const post = await getPost(id);
   
   if (!post) {
     notFound();
   }
 
-  const comments = await getComments(params.id);
+  const comments = await getComments(id);
 
   return <BlogPostClientPage initialPost={post} initialComments={comments} />;
 }
