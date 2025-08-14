@@ -1,4 +1,3 @@
-
 // src/app/login/page.tsx
 "use client";
 
@@ -76,7 +75,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
+    <div className="flex flex-col items-center justify-center min-h-screen bg-transparent p-4">
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-2 text-foreground">
             <Newspaper className="h-7 w-7 text-primary" />
