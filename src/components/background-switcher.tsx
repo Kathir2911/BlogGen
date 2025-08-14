@@ -41,7 +41,7 @@ export const backgrounds = [
   {
     name: "Misty Lake",
     slug: "misty-lake",
-    url: 'https://plus.unsplash.com/premium_photo-1754738812660-11ca16e5b8bd?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D',
+    url: 'https://plus.unsplash.com/premium_photo-1673603719788-5142a261a148?q=80&w=1920&auto=format&fit=crop',
     hint: 'misty lake'
   },
   {
