@@ -21,7 +21,7 @@ export function Background() {
   }, [background, enabled]);
   
   // Determine if the current theme is dark
-  const isDarkTheme = theme ? ['theme-inkdrop'].includes(theme) : false;
+  const isDarkTheme = theme === 'dark';
   
   // Render the background only if an image URL is set
   if (!imageUrl) return null;

@@ -144,8 +144,8 @@ export default function RegisterPage() {
     <div className="flex flex-col items-center justify-center min-h-screen bg-background p-4">
       <div className="mb-6">
         <Link href="/" className="flex items-center gap-2 text-foreground">
-            <Newspaper className="h-7 w-7" />
-            <span className="text-2xl font-bold font-headline">BlogGen</span>
+            <Newspaper className="h-7 w-7 text-primary" />
+            <span className="text-2xl font-bold font-headline text-primary">BlogGen</span>
         </Link>
       </div>
       <Card className="w-full max-w-sm">
@@ -222,7 +222,7 @@ export default function RegisterPage() {
               </Button>
               <p className="mt-4 text-xs text-center text-muted-foreground">
                 Already have an account?{' '}
-                <Link href="/login" className="underline">
+                <Link href="/login" className="text-primary hover:underline">
                   Sign in
                 </Link>
               </p>

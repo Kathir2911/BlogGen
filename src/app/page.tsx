@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
+import { BackgroundSwitcher } from '@/components/background-switcher';
 
 export default function Home() {
   const [searchQuery, setSearchQuery] = useState('');
@@ -32,6 +33,10 @@ export default function Home() {
           <Button asChild variant="ghost">
             <Link href="/login">Login</Link>
           </Button>
+           <Button asChild variant="ghost">
+            <Link href="/blog">Get Started</Link>
+          </Button>
+          <BackgroundSwitcher />
           <ThemeSwitcher />
         </div>
       </header>
@@ -40,30 +45,29 @@ export default function Home() {
           <h1 className="text-5xl md:text-7xl font-bold tracking-tight mb-4 font-headline text-foreground">
             Your Voice. Your Platform.
           </h1>
+          <p className="text-lg text-muted-foreground max-w-xl mx-auto mb-8">
+            Create, share, and discover amazing blog posts on our modern, fast, and beautiful platform. The stage is yours.
+          </p>
           <form onSubmit={handleSearch} className="mt-8 max-w-xl mx-auto">
             <div className="relative">
               <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-5 w-5 text-muted-foreground" />
               <Input
                 type="search"
                 placeholder="Search for blog posts..."
-                className="w-full pl-10 pr-20 h-12 text-lg"
+                className="w-full pl-10 pr-20 h-12 text-lg rounded-full"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
-              <Button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 h-9">
+              <Button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 h-9 rounded-full">
                 Search
               </Button>
             </div>
           </form>
-          <div className="space-x-4 mt-8">
-            <Button asChild size="lg">
-              <Link href="/blog">Get Started</Link>
-            </Button>
-          </div>
         </div>
       </main>
       <footer className="w-full py-6">
         <div className="container mx-auto text-center text-muted-foreground text-sm">
+           Powered by Next.js, Genkit, and MongoDB.
         </div>
       </footer>
     </div>

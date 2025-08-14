@@ -105,7 +105,7 @@ export default function LoginPage() {
               <div className="text-right">
                 <Link
                   href="/forgot-username"
-                  className="inline-block text-xs underline"
+                  className="inline-block text-xs text-muted-foreground hover:text-primary underline"
                 >
                   Forgot your username?
                 </Link>
@@ -123,7 +123,7 @@ export default function LoginPage() {
                <div className="text-right">
                  <Link
                   href="/forgot-password"
-                  className="inline-block text-xs underline"
+                  className="inline-block text-xs text-muted-foreground hover:text-primary underline"
                 >
                   Forgot your password?
                 </Link>
@@ -137,7 +137,7 @@ export default function LoginPage() {
             </Button>
             <p className="mt-4 text-xs text-center text-muted-foreground">
               Don&apos;t have an account?{' '}
-              <Link href="/register" className="underline">
+              <Link href="/register" className="text-primary hover:underline">
                 Sign up
               </Link>
             </p>
