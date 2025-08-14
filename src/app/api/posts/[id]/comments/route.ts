@@ -9,24 +9,25 @@ export async function GET(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { id } = params;
   try {
-    if (!ObjectId.isValid(params.id)) {
+    if (!ObjectId.isValid(id)) {
       return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
     }
 
     const { db } = await connectToDatabase();
-    const postExists = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    const postExists = await db.collection('posts').findOne({ _id: new ObjectId(id) });
     if (!postExists) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
 
-    const comments = await db.collection('comments').find({ postId: params.id }).sort({ createdAt: -1 }).toArray();
+    const comments = await db.collection('comments').find({ postId: id }).sort({ createdAt: -1 }).toArray();
     return NextResponse.json(comments.map(c => {
         const { _id, ...re } = c;
         return { ...re, id: _id.toString() };
     }));
   } catch (error) {
-    console.error(`Failed to fetch comments for post ${params.id}:`, error);
+    console.error(`Failed to fetch comments for post ${id}:`, error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -36,17 +37,18 @@ export async function POST(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
+  const { id } = params;
   if (!authenticate(request)) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
-  if (!ObjectId.isValid(params.id)) {
+  if (!ObjectId.isValid(id)) {
     return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
   }
 
   try {
     const { db } = await connectToDatabase();
-    const postExists = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    const postExists = await db.collection('posts').findOne({ _id: new ObjectId(id) });
     if (!postExists) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
@@ -59,7 +61,7 @@ export async function POST(
     }
 
     const newComment: Omit<Comment, 'id' | '_id'> = {
-      postId: params.id,
+      postId: id,
       content,
       userId,
       createdAt: new Date().toISOString(),
@@ -75,7 +77,7 @@ export async function POST(
 
     return NextResponse.json(createdComment, { status: 201 });
   } catch (error) {
-    console.error(`Failed to create comment for post ${params.id}:`, error);
+    console.error(`Failed to create comment for post ${id}:`, error);
     if (error instanceof SyntaxError) {
       return NextResponse.json({ message: 'Invalid JSON body' }, { status: 400 });
     }
