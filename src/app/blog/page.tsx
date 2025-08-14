@@ -1,5 +1,6 @@
 
 import type { Post } from "@/types";
+import { Suspense } from 'react';
 import { BlogClientPage } from "./client-page";
 import { getPostsDB } from "@/lib/data";
 
@@ -18,5 +19,9 @@ async function getPosts(): Promise<Post[]> {
 export default async function BlogPage() {
   const posts = await getPosts();
 
-  return <BlogClientPage initialPosts={posts} />;
+  return (
+    <Suspense fallback={null}>
+      <BlogClientPage initialPosts={posts} />
+    </Suspense>
+  );
 }

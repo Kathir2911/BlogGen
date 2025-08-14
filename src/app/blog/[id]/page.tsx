@@ -43,11 +43,11 @@ async function getComments(postId: string): Promise<Comment[]> {
 }
 
 interface BlogPostPageProps {
-  params: { id: string };
+  params: Promise<{ id: string }>;
 }
 
 export default async function BlogPostPage({ params }: BlogPostPageProps) {
-  const { id } = params;
+  const { id } = await params;
   const post = await getPost(id);
   
   if (!post) {

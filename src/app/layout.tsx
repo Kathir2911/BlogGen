@@ -4,7 +4,7 @@ import { Inter, Space_Grotesk, Source_Code_Pro } from 'next/font/google'
 import './globals.css';
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "@/components/theme-provider";
-import { BackgroundProvider } from '@/hooks/use-background.tsx';
+import { BackgroundProvider } from '@/hooks/use-background';
 import { Background } from '@/components/background';
 import { GlobalHeader } from '@/components/global-header';
 

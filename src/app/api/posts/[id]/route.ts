@@ -7,14 +7,15 @@ import { ObjectId } from 'mongodb';
 // GET a single post by ID
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   try {
-    if (!ObjectId.isValid(params.id)) {
+    if (!ObjectId.isValid(id)) {
       return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
     }
     const { db } = await connectToDatabase();
-    const post = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(id) });
 
     if (!post) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
@@ -24,7 +25,7 @@ export async function GET(
     return NextResponse.json({ ...rest, id: _id.toString() });
 
   } catch (error) {
-    console.error(`Failed to fetch post ${params.id}:`, error);
+    console.error(`Failed to fetch post ${id}:`, error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }
@@ -32,14 +33,15 @@ export async function GET(
 // PUT (update) a post by ID
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id:string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   const authResult = authenticate(request);
   if (!authResult.authenticated) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
-  if (!ObjectId.isValid(params.id)) {
+  if (!ObjectId.isValid(id)) {
     return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
   }
 
@@ -54,7 +56,7 @@ export async function PUT(
     const { db } = await connectToDatabase();
     
     // Check if the user owns the post
-    const post = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(id) });
     if (!post) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
@@ -67,7 +69,7 @@ export async function PUT(
     if (content) updateData.content = content;
 
     const result = await db.collection('posts').findOneAndUpdate(
-      { _id: new ObjectId(params.id) },
+      { _id: new ObjectId(id) },
       { $set: updateData },
       { returnDocument: 'after' }
     );
@@ -79,7 +81,7 @@ export async function PUT(
     const { _id, ...rest } = result;
     return NextResponse.json({...rest, id: _id.toString()});
   } catch (error) {
-    console.error(`Failed to update post ${params.id}:`, error);
+    console.error(`Failed to update post ${id}:`, error);
     if (error instanceof SyntaxError) {
       return NextResponse.json({ message: 'Invalid JSON body' }, { status: 400 });
     }
@@ -90,14 +92,15 @@ export async function PUT(
 // DELETE a post by ID
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
+  const { id } = await context.params;
   const authResult = authenticate(request);
   if (!authResult.authenticated) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
-  if (!ObjectId.isValid(params.id)) {
+  if (!ObjectId.isValid(id)) {
     return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
   }
 
@@ -105,7 +108,7 @@ export async function DELETE(
     const { db } = await connectToDatabase();
 
     // Check if the user owns the post
-    const post = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(id) });
     if (!post) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
     }
@@ -115,8 +118,8 @@ export async function DELETE(
     }
 
     // Also delete comments associated with the post
-    await db.collection('comments').deleteMany({ postId: params.id });
-    const result = await db.collection('posts').deleteOne({ _id: new ObjectId(params.id) });
+    await db.collection('comments').deleteMany({ postId: id });
+    const result = await db.collection('posts').deleteOne({ _id: new ObjectId(id) });
 
     if (result.deletedCount === 0) {
       return NextResponse.json({ message: 'Post not found' }, { status: 404 });
@@ -124,7 +127,7 @@ export async function DELETE(
 
     return new NextResponse(null, { status: 204 });
   } catch (error) {
-    console.error(`Failed to delete post ${params.id}:`, error);
+    console.error(`Failed to delete post ${id}:`, error);
     return NextResponse.json({ message: 'Internal Server Error' }, { status: 500 });
   }
 }

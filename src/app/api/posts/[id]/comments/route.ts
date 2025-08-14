@@ -7,9 +7,9 @@ import { ObjectId } from 'mongodb';
 // GET all comments for a post
 export async function GET(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await context.params;
   try {
     if (!ObjectId.isValid(id)) {
       return NextResponse.json({ message: 'Invalid post ID' }, { status: 400 });
@@ -35,9 +35,9 @@ export async function GET(
 // POST a new comment to a post
 export async function POST(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
-  const { id } = params;
+  const { id } = await context.params;
   if (!authenticate(request)) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }

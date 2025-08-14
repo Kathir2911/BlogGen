@@ -7,14 +7,14 @@ import { ObjectId } from 'mongodb';
 // DELETE a comment by ID
 export async function DELETE(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  context: { params: Promise<{ id: string }> }
 ) {
   const authResult = authenticate(request);
   if (!authResult.authenticated || !authResult.username) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
-  const { id } = params;
+  const { id } = await context.params;
   if (!ObjectId.isValid(id)) {
     return NextResponse.json({ message: 'Invalid comment ID' }, { status: 400 });
   }
