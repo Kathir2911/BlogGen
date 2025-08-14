@@ -123,9 +123,11 @@ export function BlogClientPage({ initialPosts }: BlogClientPageProps) {
       <main className="container mx-auto p-4 md:p-8">
         <header className="flex justify-between items-start mb-10 gap-4">
           <div className="text-left">
-              <div className="inline-flex items-center justify-center bg-primary text-primary-foreground p-3 rounded-full mb-4">
-                  <Newspaper className="h-8 w-8" />
-              </div>
+              <Link href="/" aria-label="Back to Homepage">
+                <div className="inline-flex items-center justify-center bg-primary text-primary-foreground p-3 rounded-full mb-4 transition-colors hover:bg-primary/90">
+                    <Newspaper className="h-8 w-8" />
+                </div>
+              </Link>
               <h1 className="font-headline text-4xl md:text-5xl font-bold tracking-tighter">
                   The Nextgen-Blog
               </h1>
