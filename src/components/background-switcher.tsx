@@ -40,7 +40,7 @@ export const backgrounds = [
   {
     name: "Misty Lake",
     slug: "misty-lake",
-    url: 'https://placehold.co/1920x1080.png',
+    url: 'https://images.unsplash.com/photo-1501426026826-31c667bdf23d?q=80&w=1920&auto=format&fit=crop',
     hint: 'misty lake'
   },
   {
@@ -142,7 +142,7 @@ export function BackgroundSwitcher() {
                 ) : (
                     <Image
                       data-ai-hint={bg.hint}
-                      src={bg.url.replace('1920x1080', '200x200')}
+                      src={bg.url.replace(/1920x1080|w=1920/, 'w=200')}
                       alt={bg.name}
                       fill
                       className="object-cover"
