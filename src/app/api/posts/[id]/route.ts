@@ -32,9 +32,10 @@ export async function GET(
 // PUT (update) a post by ID
 export async function PUT(
   request: NextRequest,
-  { params }: { params: { id: string } }
+  { params }: { params: { id:string } }
 ) {
-  if (!authenticate(request)) {
+  const authResult = authenticate(request);
+  if (!authResult.authenticated) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
@@ -51,6 +52,16 @@ export async function PUT(
     }
 
     const { db } = await connectToDatabase();
+    
+    // Check if the user owns the post
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    if (!post) {
+      return NextResponse.json({ message: 'Post not found' }, { status: 404 });
+    }
+    if (post.userId !== authResult.username) {
+        return NextResponse.json({ message: 'Forbidden: You do not own this post' }, { status: 403 });
+    }
+
     const updateData: Partial<Post> = {};
     if (title) updateData.title = title;
     if (content) updateData.content = content;
@@ -81,7 +92,8 @@ export async function DELETE(
   request: NextRequest,
   { params }: { params: { id: string } }
 ) {
-  if (!authenticate(request)) {
+  const authResult = authenticate(request);
+  if (!authResult.authenticated) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
   
@@ -91,6 +103,17 @@ export async function DELETE(
 
   try {
     const { db } = await connectToDatabase();
+
+    // Check if the user owns the post
+    const post = await db.collection('posts').findOne({ _id: new ObjectId(params.id) });
+    if (!post) {
+      return NextResponse.json({ message: 'Post not found' }, { status: 404 });
+    }
+
+    if (post.userId !== authResult.username) {
+        return NextResponse.json({ message: 'Forbidden: You do not own this post' }, { status: 403 });
+    }
+
     // Also delete comments associated with the post
     await db.collection('comments').deleteMany({ postId: params.id });
     const result = await db.collection('posts').deleteOne({ _id: new ObjectId(params.id) });
