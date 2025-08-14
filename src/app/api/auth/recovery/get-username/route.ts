@@ -1,7 +1,7 @@
-
 // src/app/api/auth/recovery/get-username/route.ts
 import { NextResponse, type NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
+import { verifyMockOtp } from '@/lib/otp';
 
 export async function POST(request: NextRequest) {
   try {
@@ -12,9 +12,7 @@ export async function POST(request: NextRequest) {
     }
     
     // --- OTP Verification ---
-    const { MOCK_OTP_STORE: otpStore } = require('../../register/route');
-    const expectedOtp = otpStore[mobile];
-    if (!expectedOtp || expectedOtp !== otp) {
+    if (!verifyMockOtp(mobile, otp)) {
         return NextResponse.json({ message: 'Invalid or expired OTP' }, { status: 400 });
     }
     // --- End OTP Verification ---
@@ -26,9 +24,6 @@ export async function POST(request: NextRequest) {
     if (!user) {
         return NextResponse.json({ message: 'User not found.' }, { status: 404 });
     }
-    
-    // Clean up OTP after successful retrieval
-    delete otpStore[mobile];
 
     return NextResponse.json({ username: user.username }, { status: 200 });
 

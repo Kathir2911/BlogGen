@@ -2,17 +2,7 @@
 import { NextResponse, type NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
 import { hash } from 'bcryptjs';
-
-// In a real app, this would be stored securely and invalidated after use.
-const MOCK_OTP_STORE: Record<string, string> = {};
-
-export function setMockOtp(mobile: string, otp: string) {
-    MOCK_OTP_STORE[mobile] = otp;
-    // OTP is valid for 5 minutes
-    setTimeout(() => {
-        delete MOCK_OTP_STORE[mobile];
-    }, 5 * 60 * 1000);
-}
+import { verifyMockOtp } from '@/lib/otp';
 
 export async function POST(request: NextRequest) {
   try {
@@ -36,8 +26,7 @@ export async function POST(request: NextRequest) {
     }
     
     // --- OTP Verification ---
-    const expectedOtp = MOCK_OTP_STORE[mobile];
-    if (!expectedOtp || expectedOtp !== otp) {
+    if (!verifyMockOtp(mobile, otp)) {
         return NextResponse.json({ message: 'Invalid or expired OTP' }, { status: 400 });
     }
     // --- End OTP Verification ---
@@ -71,9 +60,6 @@ export async function POST(request: NextRequest) {
       password: hashedPassword,
       createdAt: new Date(),
     });
-
-    // Clean up OTP after successful registration
-    delete MOCK_OTP_STORE[mobile];
 
     return NextResponse.json({ message: 'User created successfully', userId: result.insertedId }, { status: 201 });
 

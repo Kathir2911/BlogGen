@@ -1,7 +1,7 @@
 // src/app/api/auth/send-otp/route.ts
 import { NextResponse, type NextRequest } from 'next/server';
 import { connectToDatabase } from '@/lib/mongodb';
-import { setMockOtp } from '../register/route';
+import { setMockOtp } from '@/lib/otp';
 
 require('dotenv').config()
 
