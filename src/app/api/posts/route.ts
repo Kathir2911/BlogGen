@@ -2,16 +2,7 @@ import { NextResponse, type NextRequest } from 'next/server';
 import { authenticate } from '@/lib/auth';
 import type { Post } from '@/types';
 import { connectToDatabase } from '@/lib/mongodb';
-import { ObjectId } from 'mongodb';
-
-export async function getPostsDB() {
-  const { db } = await connectToDatabase();
-  const posts = await db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
-  return posts.map(p => {
-    const { _id, ...re } = p;
-    return { ...re, id: _id.toString() };
-  })
-}
+import { getPostsDB } from '@/lib/data';
 
 // GET all posts
 export async function GET() {
@@ -26,16 +17,18 @@ export async function GET() {
 
 // POST a new post
 export async function POST(request: NextRequest) {
-  if (!authenticate(request)) {
+  const authResult = authenticate(request);
+  if (!authResult.authenticated || !authResult.username) {
     return NextResponse.json({ message: 'Unauthorized' }, { status: 401 });
   }
 
   try {
     const body = await request.json();
-    const { title, content, userId } = body;
+    const { title, content } = body;
+    const userId = authResult.username;
 
     if (!title || !content || !userId) {
-      return NextResponse.json({ message: 'Missing required fields: title, content, userId' }, { status: 400 });
+      return NextResponse.json({ message: 'Missing required fields: title, content' }, { status: 400 });
     }
 
     const { db } = await connectToDatabase();

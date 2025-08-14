@@ -1,43 +1,15 @@
-// This file is no longer used for data storage as we have migrated to MongoDB.
-// It is kept for reference or future use if needed.
-import type { Post, Comment } from '@/types';
+// src/lib/data.ts
+import { connectToDatabase } from './mongodb';
 
-// In-memory store
-let posts: Post[] = [
-  {
-    id: '1',
-    userId: 'user-123',
-    title: 'Getting Started with Next.js',
-    content: 'Next.js is a React framework for building full-stack web applications. It comes with a powerful set of features out of the box.',
-    createdAt: new Date().toISOString(),
-  },
-  {
-    id: '2',
-    userId: 'user-456',
-    title: 'Exploring Tailwind CSS',
-    content: 'Tailwind CSS is a utility-first CSS framework that can be composed to build any design, directly in your markup.',
-    createdAt: new Date().toISOString(),
-  },
-];
-
-let comments: Comment[] = [
-    {
-        id: 'c1',
-        postId: '1',
-        userId: 'user-789',
-        content: 'Great overview! I found this very helpful.',
-        createdAt: new Date().toISOString(),
-    },
-    {
-        id: 'c2',
-        postId: '1',
-        userId: 'user-456',
-        content: 'Thanks for sharing. Looking forward to more content.',
-        createdAt: new Date().toISOString(),
-    }
-];
-
-export const data = {
-  posts,
-  comments,
-};
+/**
+ * Fetches all posts from the database, sorted by creation date.
+ * @returns A promise that resolves to an array of posts.
+ */
+export async function getPostsDB() {
+  const { db } = await connectToDatabase();
+  const posts = await db.collection('posts').find({}).sort({ createdAt: -1 }).toArray();
+  return posts.map(p => {
+    const { _id, ...re } = p;
+    return { ...re, id: _id.toString() };
+  });
+}

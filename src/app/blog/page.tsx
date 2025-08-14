@@ -1,6 +1,7 @@
+
 import type { Post } from "@/types";
 import { BlogClientPage } from "./client-page";
-import { getPostsDB } from "@/app/api/posts/route";
+import { getPostsDB } from "@/lib/data";
 
 async function getPosts(): Promise<Post[]> {
   try {
