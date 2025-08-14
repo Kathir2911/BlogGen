@@ -6,7 +6,6 @@ import { useRouter } from 'next/navigation';
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ThemeSwitcher } from "@/components/theme-switcher";
-import { BackgroundSwitcher } from "@/components/background-switcher";
 import { Input } from '@/components/ui/input';
 import { Search } from 'lucide-react';
 
@@ -33,7 +32,6 @@ export default function Home() {
           <Button asChild variant="ghost">
             <Link href="/login">Login</Link>
           </Button>
-          <BackgroundSwitcher />
           <ThemeSwitcher />
         </div>
       </header>
