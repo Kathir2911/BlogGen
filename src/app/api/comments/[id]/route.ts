@@ -1,3 +1,4 @@
+
 import { NextResponse, type NextRequest } from 'next/server';
 import { authenticate } from '@/lib/auth';
 import { connectToDatabase } from '@/lib/mongodb';
